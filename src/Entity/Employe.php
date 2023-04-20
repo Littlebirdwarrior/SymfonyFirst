@@ -29,6 +29,10 @@ class Employe
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
+    #[ORM\ManyToOne(inversedBy: 'employes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Entreprise $relation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Employe
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getRelation(): ?Entreprise
+    {
+        return $this->relation;
+    }
+
+    public function setRelation(?Entreprise $relation): self
+    {
+        $this->relation = $relation;
 
         return $this;
     }
