@@ -23,7 +23,7 @@ class Entreprise
     #[ORM\Column(length: 100)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 11)]
     private ?string $cp = null;
 
     #[ORM\Column(length: 50)]
