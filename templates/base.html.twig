@@ -9,9 +9,23 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
     </head>
     <body>
         {% block body %}
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_entreprise')}} "> Liste des entreprise</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_employe')}} "> Liste des employes</a>
+                    </li>
+                </ul> 
+            </nav>
         
         {% endblock %}
     </body>
