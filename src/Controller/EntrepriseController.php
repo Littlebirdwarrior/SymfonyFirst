@@ -11,8 +11,10 @@ class EntrepriseController extends AbstractController
     #[Route('/entreprise', name: 'app_entreprise')]
     public function index(): Response
     {
+        $tableau = ["valeur 1", "valeur 2", "valeur 3", "valeur 4"];
         return $this->render('entreprise/index.html.twig', [
-            'controller_name' => 'EntrepriseController',
+            'name' => 'Mickeal',
+            'tableau' => $tableau
         ]);
     }
 }

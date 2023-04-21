@@ -4,4 +4,8 @@
 
 {% block body %}
     <h1>Liste des entreprises</h1>
+    <p> Hello {{ name }}</p>
+    {% for valeur in tableau %}
+        <li>{{ valeur }}</li>
+    {% endfor %}
 {% endblock %}
