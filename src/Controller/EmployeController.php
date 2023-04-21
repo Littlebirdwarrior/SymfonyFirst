@@ -14,7 +14,7 @@ class EmployeController extends AbstractController
     public function index( ManagerRegistry $doctrine): Response
     {
         //recuperer les entreprise de la bdd
-        $employes =  $doctrine->getRepository(Employe::class)->findAll();
+        $employes =  $doctrine->getRepository(Employe::class)->findBy([], ["nom" => "ASC"]);
 
         return $this->render('employe/index.html.twig', [
             'employes' => $employes
