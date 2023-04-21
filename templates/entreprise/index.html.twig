@@ -3,9 +3,17 @@
 {% block title %}Hello EntrepriseController!{% endblock %}
 
 {% block body %}
-    <h1>Liste des entreprises</h1>
-    <p> Hello {{ name }}</p>
-    {% for valeur in tableau %}
-        <li>{{ valeur }}</li>
+    <h1> Liste des entreprises </h1>
+
+    {% for entreprise in entreprises %}
+
+        <p>{{ entreprise.raisonSociale ~ ' (' ~ entreprise.cp ~ ' ' ~ entreprise.ville ~') ' }}</p>
+
+
+        <p>{{ entreprise.raisonSociale}} ({{ entreprise.cp }} {{ entreprise.ville }}) </p><br>
+
+        <p>{{ entreprise}}</p>
+
     {% endfor %}
+
 {% endblock %}

@@ -2,19 +2,22 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Entreprise;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EntrepriseController extends AbstractController
 {
     #[Route('/entreprise', name: 'app_entreprise')]
-    public function index(): Response
+    public function index( ManagerRegistry $doctrine): Response
     {
-        $tableau = ["valeur 1", "valeur 2", "valeur 3", "valeur 4"];
+        //recuperer les entreprise de la bdd
+        $entreprises =  $doctrine->getRepository(Entreprise::class)->findAll();
+
         return $this->render('entreprise/index.html.twig', [
-            'name' => 'Mickeal',
-            'tableau' => $tableau
+            'entreprises' => $entreprises
         ]);
     }
 }
