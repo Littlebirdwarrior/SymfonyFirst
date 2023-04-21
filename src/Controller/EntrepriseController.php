@@ -13,11 +13,26 @@ class EntrepriseController extends AbstractController
     #[Route('/entreprise', name: 'app_entreprise')]
     public function index( ManagerRegistry $doctrine): Response
     {
-        //recuperer les entreprise de la bdd
+        
+        /**
+         * @Route("/entreprise", name="app_entreprise")
+         */
         $entreprises =  $doctrine->getRepository(Entreprise::class)->findBy([], ["raisonSociale" => "ASC"]);
 
         return $this->render('entreprise/index.html.twig', [
             'entreprises' => $entreprises
         ]);
     }
+
+    /**
+     * @Route("/entreprise/{id}", name="show_entreprise")
+     */
+    public function show(): Response 
+    {
+        return $this->render('entreprise/index.html.twig', [
+            'entreprise' => $entreprise
+        ]);
+    }
+
+
 }
