@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Entreprise;
+use App\Form\EntrepriseType;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,30 @@ class EntrepriseController extends AbstractController
             'entreprises' => $entreprises
         ]);
     }
+
+    #[Route('/entreprise/add', name: 'add_entreprise')]
+    public function add( ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request) : Response 
+    {
+        $form = $this->createForm( EntrepriseType::class, $entreprise);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $entreprise = $form->getData();
+            $entityManager = $doctrine->getManager();
+            //prepare en équivalent PDO
+            $entityManager->persist($entreprise);
+            //insert into (execute)
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_entreprise');
+        }
+
+        return $this->render('entreprise/add.html.twig', [
+            'formAddEntreprise' => $form->createView()
+        ]);
+    }
+
 
     /**
      * @Route("/entreprise/{id}", name="show_entreprise")
