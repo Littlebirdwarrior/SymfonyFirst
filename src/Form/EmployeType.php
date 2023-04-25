@@ -3,12 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Employe;
+use App\Entity\Relation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmployeType extends AbstractType
 {
@@ -32,8 +34,9 @@ class EmployeType extends AbstractType
             ->add('ville', TextType::class, [
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('relation', TextType::class, [
-                'attr' => ['class' => 'form-control']
+            ->add('entreprise', EntityType::class, [
+                'class' => Relation::class,
+                'choice_label' => 'raisonSociale',
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [ 'class' => 'btn btn-success']
