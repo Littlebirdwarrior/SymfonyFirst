@@ -113,6 +113,6 @@ class Employe
 
     public function __toString()
     {
-        return $this->nom . " " . $this->prenom ." (". $this->getRelation() .") ";
+        return $this->nom . " " . $this->prenom ;
     }
 }
