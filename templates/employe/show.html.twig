@@ -5,7 +5,10 @@
 {% block body %}
     <h1>{{ employe}}</h1>
     <p>
-        {{ employe.ville}}
+        ville : {{ employe.ville}} <br>
+        entreprise : {{ employe.relation}} <br>
+        date d'embauche : {{ employe.dateEmbauche | date('d-m-Y')}} <br>
+        date naisssance : {{ employe.datenaissance | date('d-m-Y')}} ( {{ employe.age}} ans )<br>
     </p>
     
 {% endblock %}
