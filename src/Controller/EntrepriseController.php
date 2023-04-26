@@ -15,9 +15,6 @@ class EntrepriseController extends AbstractController
     public function index( ManagerRegistry $doctrine): Response
     {
         
-        /**
-         * @Route("/entreprise", name="app_entreprise")
-         */
         $entreprises =  $doctrine->getRepository(Entreprise::class)->findBy([], ["raisonSociale" => "ASC"]);
 
         return $this->render('entreprise/index.html.twig', [
@@ -51,6 +48,18 @@ class EntrepriseController extends AbstractController
         return $this->render('entreprise/add.html.twig', [
             'formAddEntreprise' => $form->createView()
         ]);
+    }
+
+    #[Route('/entreprise/{id}/delete', name: 'delete_entreprise')]
+    public function delete( ManagerRegistry $doctrine, Entreprise $entreprise):Response
+    {
+        $entityManager = $doctrine->getManager();
+        //enleve l'employe de la liste des employe
+        $entityManager->remove($entreprise);
+        //persist pas utile, flush, execute requete
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_entreprise');
     }
 
 

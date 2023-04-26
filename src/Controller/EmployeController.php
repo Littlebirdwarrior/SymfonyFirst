@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Employe;
 use App\Form\EmployeType;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\AssignOp\Mod;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,6 +52,18 @@ class EmployeController extends AbstractController
         ]);
     }
 
+    #[Route('/employe/{id}/delete', name: 'delete_employe')]
+    public function delete( ManagerRegistry $doctrine, Employe $employe):Response
+    {
+        $entityManager = $doctrine->getManager();
+        //enleve l'employe de la liste des employe
+        $entityManager->remove($employe);
+        //persist pas utile, flush, execute requete
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_employe');
+    }
+
     #[Route('/employe/{id}', name: 'show_employe')]
     public function show(Employe $employe): Response 
     {
@@ -58,4 +71,5 @@ class EmployeController extends AbstractController
             'employe' => $employe
         ]);
     }
+
 }
