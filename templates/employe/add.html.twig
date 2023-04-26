@@ -10,6 +10,25 @@
         <h1> Ajouter un employé </h1>
     {% endif %}
 
-    {{ form(formAddEmploye) }}
+    {# {{ form(formAddEmploye) }} #}
+
+    {{ form_start(formAddEmploye) }}
+        {{ form_errors(formAddEmploye) }}
+        <div class="rowform">
+            {{ form_row(formAddEmploye.nom) }}
+            {{ form_row(formAddEmploye.prenom) }}
+        </div>
+        <div class="rowform">
+            {{ form_row(formAddEmploye.dateNaissance) }}
+            {{ form_row(formAddEmploye.dateEmbauche) }}
+        </div>
+        <div class="rowform">
+            {{ form_row(formAddEmploye.ville) }}
+            {{ form_row(formAddEmploye.entreprise) }}
+        </div>
+
+        {{ form_row(formAddEmploye.submit, { 'label': 'Envoyer' }) }}
+    {{ form_end(formAddEmploye) }}
+
 
 {% endblock %}

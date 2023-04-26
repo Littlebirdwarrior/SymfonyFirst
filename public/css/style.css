@@ -6,3 +6,8 @@ body {
 h1 {
  color: palevioletred;
 }
+
+.rowform {
+    display: flex;
+    gap: 30px
+}
