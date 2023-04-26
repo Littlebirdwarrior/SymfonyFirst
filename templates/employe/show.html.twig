@@ -6,7 +6,7 @@
     <h1>{{ employe}}</h1>
     <p>
         ville : {{ employe.ville}} <br>
-        entreprise : <a href="{{ path( 'show_entreprise', {'id': employe.relation.id} )}}">{{ employe.relation}}</a> <br>
+        entreprise : <a href="{{ path( 'show_entreprise', {'id': employe.entreprise.id} )}}">{{ employe.entreprise}}</a> <br>
         date d'embauche : {{ employe.dateEmbauche | date('d-m-Y')}} <br>
         date naisssance : {{ employe.datenaissance | date('d-m-Y')}} ( {{ employe.age}} ans )<br>
     </p>

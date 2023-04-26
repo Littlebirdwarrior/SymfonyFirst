@@ -31,7 +31,7 @@ class Entreprise
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Employe::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Employe::class, orphanRemoval: true)]
     private Collection $employes;
 
     #[ORM\Column(length: 50)]
@@ -119,7 +119,7 @@ class Entreprise
     {
         if (!$this->employes->contains($employe)) {
             $this->employes->add($employe);
-            $employe->setRelation($this);
+            $employe->setEntreprise($this);
         }
 
         return $this;
@@ -129,8 +129,8 @@ class Entreprise
     {
         if ($this->employes->removeElement($employe)) {
             // set the owning side to null (unless already changed)
-            if ($employe->getRelation() === $this) {
-                $employe->setRelation(null);
+            if ($employe->getEntreprise() === $this) {
+                $employe->setEntreprise(null);
             }
         }
 

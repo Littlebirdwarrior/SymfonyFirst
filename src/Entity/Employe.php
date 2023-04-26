@@ -29,9 +29,9 @@ class Employe
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\ManyToOne(inversedBy: 'employes')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Entreprise $relation = null;
+    private ?Entreprise $entreprise = null;
 
     public function getId(): ?int
     {
@@ -98,17 +98,6 @@ class Employe
         return $this;
     }
 
-    public function getRelation(): ?Entreprise
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(?Entreprise $relation): self
-    {
-        $this->relation = $relation;
-
-        return $this;
-    }
 
     public function getAge() {
         $now = new \DateTime();
@@ -120,5 +109,17 @@ class Employe
     public function __toString()
     {
         return $this->nom . " " . $this->prenom ;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
     }
 }
